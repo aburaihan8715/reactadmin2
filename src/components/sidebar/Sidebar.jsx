@@ -1,22 +1,28 @@
-import "./sidebar.scss";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
-import StoreIcon from "@mui/icons-material/Store";
-import InsertChartIcon from "@mui/icons-material/InsertChart";
-import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
-import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import './sidebar.scss';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
+import StoreIcon from '@mui/icons-material/Store';
+import InsertChartIcon from '@mui/icons-material/InsertChart';
+import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import SettingsSystemDaydreamOutlinedIcon from '@mui/icons-material/SettingsSystemDaydreamOutlined';
+import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { DarkModeContext } from '../../context/DarkModeContextCopy2';
 
 const Sidebar = () => {
+  const { dispatch } = useContext(DarkModeContext);
   return (
     <div className="sidebar">
       <div className="top">
-        <span className="logo">abuadmin</span>
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <span className="logo">abuadmin</span>
+        </Link>
       </div>
       <hr />
       <div className="center">
@@ -28,15 +34,19 @@ const Sidebar = () => {
           </li>
 
           <p className="title">LIST</p>
-          <li>
-            <PersonOutlineIcon className="icon" />
-            <span>Users</span>
-          </li>
+          <Link to="/users" style={{ textDecoration: 'none' }}>
+            <li>
+              <PersonOutlineIcon className="icon" />
+              <span>Users</span>
+            </li>
+          </Link>
 
-          <li>
-            <StoreIcon className="icon" />
-            <span>Products</span>
-          </li>
+          <Link to="/products" style={{ textDecoration: 'none' }}>
+            <li>
+              <StoreIcon className="icon" />
+              <span>Products</span>
+            </li>
+          </Link>
 
           <li>
             <CreditCardIcon className="icon" />
@@ -88,8 +98,14 @@ const Sidebar = () => {
         </ul>
       </div>
       <div className="bottom">
-        <div className="colorOption"></div>
-        <div className="colorOption"></div>
+        <div
+          onClick={() => dispatch({ type: 'LIGHT' })}
+          className="colorOption"
+        ></div>
+        <div
+          onClick={() => dispatch({ type: 'DARK' })}
+          className="colorOption"
+        ></div>
       </div>
     </div>
   );
